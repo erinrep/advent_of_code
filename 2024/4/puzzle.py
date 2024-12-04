@@ -21,7 +21,7 @@ for i, row in enumerate(matrix):
     total += "".join(np.flip(col)).count(string_to_find)
 
 rows, cols = matrix.shape
-for i in range(-rows + 1, cols):
+for i in range(-rows + len(string_to_find), cols - len(string_to_find) + 1):
     # diagonal top left to bottom right
     diag = np.diagonal(matrix, offset=i)
     total += "".join(diag).count(string_to_find)
