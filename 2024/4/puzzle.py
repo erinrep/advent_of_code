@@ -1,6 +1,6 @@
 import numpy as np
 
-print("Day 3: Ceres Search")
+print("Day 4: Ceres Search")
 
 with open("input.txt", encoding="utf-8") as f:
     lines = [list(x.replace("\n", "")) for x in list(f)]
