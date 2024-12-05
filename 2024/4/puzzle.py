@@ -9,30 +9,30 @@ string_to_find = "XMAS"
 
 matrix = np.array(lines)
 
-total = 0
+
+def get_count(list_of_letters, str):
+    # forwards
+    count = "".join(list_of_letters).count(str)
+    # backwards
+    count += "".join(np.flip(list_of_letters)).count(str)
+    return count
+
+
+count = 0
 for i, row in enumerate(matrix):
     # horizontal
-    total += "".join(row).count(string_to_find)
-    total += "".join(np.flip(row)).count(string_to_find)
-
+    count += get_count(row, string_to_find)
     # vertical
-    col = matrix[:, i]
-    total += "".join(col).count(string_to_find)
-    total += "".join(np.flip(col)).count(string_to_find)
+    count += get_count(matrix[:, i], string_to_find)
 
 rows, cols = matrix.shape
 for i in range(-rows + len(string_to_find), cols - len(string_to_find) + 1):
     # diagonal top left to bottom right
-    diag = np.diagonal(matrix, offset=i)
-    total += "".join(diag).count(string_to_find)
-    total += "".join(np.flip(diag)).count(string_to_find)
-
+    count += get_count(np.diagonal(matrix, offset=i), string_to_find)
     # diagonal top right to bottom left
-    diag = np.diagonal(np.rot90(matrix), offset=i)
-    total += "".join(diag).count(string_to_find)
-    total += "".join(np.flip(diag)).count(string_to_find)
+    count += get_count(np.diagonal(np.rot90(matrix), offset=i), string_to_find)
 
-print("Part 1:", total)
+print("Part 1:", count)
 
 
 def get_element(matrix, x, y):
